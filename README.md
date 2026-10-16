@@ -1,14 +1,25 @@
-# Roberto Greppi — starter Netlify
+# Roberto Greppi Milano — progetto Netlify
 
-Include una homepage responsive, un catalogo dimostrativo filtrabile e una modale di accesso solo grafica, oltre a configurazione Netlify e funzione health-check.
+## Cosa contiene questa consegna
+- Sito responsive con identità visiva bianca/nera, logo originale ricevuto e profondità/ombre 3D.
+- Catalogo intenzionalmente vuoto: nessun bijoux, prezzo, stock, cliente o contatto inventato.
+- Interfaccia per ricerca e filtri; carrello dimostrativo e riepilogo ordine scaricabile.
+- Struttura iniziale per area clienti, flusso B2B e storico ordini.
+- `supabase/schema.sql`: schema di partenza per un backend reale con profili, ruoli, articoli, prezzi per cliente e ordini, con Row Level Security.
+- `netlify/functions/health.js`: endpoint di controllo deploy.
 
-**Non è ancora pronto per uso commerciale.** Non contiene autenticazione reale, database persistente, ruoli admin/cliente, prezzi personalizzati, upload foto, pannello amministratore o ordini WhatsApp configurati. Non inserire dati reali in questa versione.
+## Pubblicazione frontend su Netlify
+Nel repository GitHub collegato a Netlify, caricare/sostituire **tutti i file e le cartelle** contenuti in questo progetto mantenendo la struttura. Impostazioni build: comando vuoto; directory pubblicazione `.`; directory funzioni `netlify/functions`.
 
-## Pubblicazione
-1. Caricare tutti i file nella root del repository GitHub.
-2. In Netlify scegliere Add new project → Import an existing project → GitHub.
-3. Selezionare il repository; build command vuoto e publish directory `.`.
-4. Pubblicare. Test health-check: `/.netlify/functions/health`.
+## Importante: cosa non è ancora live
+Il sito statico non può garantire autenticazione, prezzi privati o dati condivisi fra dispositivi. Login, amministrazione protetta, database, upload immagini, prezzi personalizzati e ordini con storico richiedono un backend configurato. Il carrello in questa versione è una dimostrazione locale e non invia ordini. Non inserire credenziali reali.
 
-## Da completare prima della produzione
-Collegare database e autenticazione server-side; definire ruoli; creare API protette per catalogo, prezzi e ordini; configurare archiviazione foto e numero WhatsApp commerciale. I segreti vanno impostati nelle environment variables Netlify, mai nel codice client.
+## Backend di produzione
+1. Creare un progetto Supabase.
+2. Eseguire `supabase/schema.sql` nel SQL Editor e verificare le policy con un tecnico prima di inserire dati reali.
+3. Configurare Auth, creare l'utente amministratore e assegnare esplicitamente il ruolo `admin` al relativo profilo.
+4. Configurare variabili ambiente lato server su Netlify; mai pubblicare la service-role key nel browser o nel repository.
+5. Collegare funzioni server per CRUD prodotti, immagini, prezzi per account, creazione ordine e storico; verificare le policy e il flusso ordine prima di usarlo con clienti.
+6. Inserire il numero WhatsApp aziendale verificato solo quando disponibile.
+
+Nessun dato commerciale, numero WhatsApp o account è stato inventato. Il logo è stato copiato in `assets/` dai file forniti dall'utente.
